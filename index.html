@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAM Castle / Washington Green 内部查询系统</title>
+  <link rel="stylesheet" href="./styles.css?v=20260624-1" />
+</head>
+<body>
+  <header class="site-header">
+    <button class="logo-button" id="homeLogo" title="返回首页">
+      <img src="./assets/mam_logo_transparent.png" alt="MAM 艺仓美术馆" />
+    </button>
+    <nav class="top-nav" aria-label="主导航">
+      <a href="#/">作品</a>
+      <a href="#/about">资料规则</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="collection-hero">
+      <div>
+        <p class="eyebrow">MAM INTERNAL DATABASE</p>
+        <h1>Castle / WG 版画查询</h1>
+      </div>
+      <div class="hero-meta">
+        <span id="dataUpdated">资料更新时间：读取中</span>
+        <span id="workCount">0 件作品</span>
+      </div>
+      <div class="group-summary" aria-label="批次统计">
+        <span>早期艺术家 <strong id="earlyArtistCount">0</strong></span>
+        <span>早期作品 <strong id="earlyWorkCount">0</strong></span>
+        <span>后期艺术家 <strong id="lateArtistCount">0</strong></span>
+        <span>后期作品 <strong id="lateWorkCount">0</strong></span>
+      </div>
+    </section>
+
+    <section id="listingView" class="layout">
+      <aside class="filters" aria-label="筛选条件">
+        <div class="filter-title-row">
+          <h2>筛选</h2>
+          <button class="text-button" id="clearFilters">清除条件</button>
+        </div>
+        <label class="field">
+          <span>模糊查询</span>
+          <input id="searchInput" type="search" placeholder="作品名、艺术家、标签、媒介" />
+        </label>
+        <label class="field">
+          <span>艺术家</span>
+          <select id="artistFilter"><option value="">全部艺术家</option></select>
+        </label>
+        <div class="field pair">
+          <label><span>最低价格 RMB</span><input id="priceMin" type="number" inputmode="numeric" placeholder="0" /></label>
+          <label><span>最高价格 RMB</span><input id="priceMax" type="number" inputmode="numeric" placeholder="不限" /></label>
+        </div>
+        <div class="field pair">
+          <label><span>起始年代</span><input id="yearMin" type="number" inputmode="numeric" placeholder="如 2010" /></label>
+          <label><span>结束年代</span><input id="yearMax" type="number" inputmode="numeric" placeholder="如 2016" /></label>
+        </div>
+        <label class="field">
+          <span>风格</span>
+          <select id="styleFilter"><option value="">全部风格</option></select>
+        </label>
+        <label class="field">
+          <span>媒介</span>
+          <select id="mediumFilter"><option value="">全部媒介</option></select>
+        </label>
+        <label class="field">
+          <span>尺寸关键词</span>
+          <input id="sizeFilter" type="search" placeholder="例如 40、30、cm、in" />
+        </label>
+      </aside>
+
+      <section class="collection">
+        <div class="collection-toolbar">
+          <div>
+            <p class="eyebrow">COLLECTION</p>
+            <div class="group-tabs" aria-label="批次切换">
+              <button type="button" class="group-tab" data-group="Castle 早期（第1-2 批）">Castle 早期（第1-2 批）</button>
+              <button type="button" class="group-tab active" data-group="Castle 后期">Castle 后期</button>
+            </div>
+            <h2 id="activeGroupTitle">Castle 后期</h2>
+            <div class="collection-stats">
+              <span>收录 <strong id="artistCount">0</strong> 位艺术家</span>
+              <span><strong id="skuCount">0</strong> 件作品</span>
+            </div>
+          </div>
+          <div class="toolbar-right">
+            <span id="resultCount">当前 0 件</span>
+            <select id="sortSelect" aria-label="排序">
+              <option value="title">按作品名</option>
+              <option value="artist">按艺术家</option>
+              <option value="priceAsc">价格从低到高</option>
+              <option value="priceDesc">价格从高到低</option>
+              <option value="yearDesc">年代从新到旧</option>
+            </select>
+          </div>
+        </div>
+        <div id="cards" class="cards"></div>
+        <div id="pagination" class="pagination" aria-label="翻页"></div>
+      </section>
+    </section>
+
+    <section id="detailView" class="detail hidden"></section>
+    <section id="aboutView" class="about hidden">
+      <h2>资料使用规则</h2>
+      <p>硬字段优先来自证书、标准化照片与可信来源；AI 生成内容只作为内部草稿和画面解读，不代表最终销售承诺。</p>
+      <p>官方零售价、二级挂牌价、拍卖成交价分开显示。未找到可信公开拍卖成交记录时，系统保留明确提示。</p>
+    </section>
+  </main>
+
+  <script src="./app.js?v=20260630-static-dist"></script>
+</body>
+</html>
